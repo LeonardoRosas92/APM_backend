@@ -163,7 +163,7 @@ const actualizarPassword = async (req, res) => {
     const { pwd_actual, pwd_nuevo } = req.body;
     const doctor = await Doctor.findById(id);
     try {
-        if (!doctor) {
+        if (!doctor) { 
             const error = new Error('Hubo un error');
             return res.status(400).json({ msg: error.message });
         }
