@@ -12,7 +12,12 @@ const agregarPaciente = async (req, res) => {
 };
 const obtenerPacientes = async (req, res) => {
     const pacientes = await Paciente.find().where('doctor').equals(req.doctor._id);
-    res.json(pacientes);
+    if (pacientes) {
+        res.json(pacientes);
+    }else{
+        return res.status(404).json({ msg: "No encontrado" });
+    }
+    
 };
 
 const obtenerPaciente = async (req, res) => {

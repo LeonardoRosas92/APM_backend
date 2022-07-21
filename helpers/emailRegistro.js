@@ -4,18 +4,19 @@ const emailRegistro = async (datos) => {
     var transporter = nodemailer.createTransport({
         host: process.env.EMAIL_HOST,
         port: process.env.EMAIL_PORT,
+        secure: false,
         auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS
         }
     });
 
-    const {email, nombre, token} = datos;
+    const { email, nombre, token } = datos;
     const info = await transporter.sendMail({
-        from: "APM - Administrador de Pacientes de Doctores", 
+        from: process.env.EMAIL_USER,
         to: email,
         subject: 'Comprueba tu cuenta en APM',
-        text: 'Comprueba tu cuenta en APV',
+        text: 'Comprueba tu cuenta en APM',
         html: `<p>Hola: ${nombre}, comprueba tu cuenta en APV. </p>
         <p>Tu cuenta ya esta lista, solo debes comprobarla en el sigueinte enlace:</p>
         <a href="${process.env.FRONTEND_URL}/confirmar/${token}">Comprobar cuenta</a>
